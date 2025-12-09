@@ -715,7 +715,10 @@ public void day2part2() {
     }
 
     public static void main(String[] args) {
-      Aufgaben advent = new Aufgaben();
-      advent.day7part2();
+      //Aufgaben advent = new Aufgaben();
+      //advent.day7part2();
+        Day8 advent = new Day8();
+        advent.part1();
+
     }
 }
