@@ -13,6 +13,14 @@ import static de.do1eh.Advent2025.Tools.*;
 
 public class Day9 {
 
+    /**
+     * Tag 9: Fußboden fliesen
+     * Dieser Teil war recht einfach:
+     * Alle Punkte durchlaufen
+     * Rechtecke zwischen allen Punkten aufspannen
+     * Fläche berechnen
+     * Die größte Fläche gewinnt
+     */
     public void part1() {
 
         List<String> input= readUrlContent("https://adventofcode.com/2025/day/9/input", SESSION_COOKIE);
@@ -66,6 +74,14 @@ public class Day9 {
         System.out.println(loesung);
     }
 
+    /**
+     * Nachdem ich herausgefunden habe, dass es Bibliotheken für geometrische
+     * Berechnungen aller Art gibt (JTS für Java, shapely für Python) war der Rest einfach:
+     * Ein JTS Polygon aus allen Punken bauen
+     * Den Algo von Part1 laufen lassen
+     * Ein zweites Polygon aus den Recheckkoordinaten bauen
+     * Wenn das zweite Polygon in das erste polygon passt (a.contains(b), dann Fläche übernehmen.
+     */
     public void part2() {
 
         List<String> input= readUrlContent("https://adventofcode.com/2025/day/9/input", SESSION_COOKIE);
