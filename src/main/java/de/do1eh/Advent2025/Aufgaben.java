@@ -14,8 +14,8 @@ import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
 public class Aufgaben {
 
     public static void main(String[] args) {
-        Day9 advent = new Day9();
-        advent.part2();
+        Day8 advent = new Day8();
+        advent.part1();
 
     }
 }

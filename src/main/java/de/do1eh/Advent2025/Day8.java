@@ -5,16 +5,22 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
+
+/**
+ * Puaha...doch noch geschafft...ich mag SQL
+ * Die gemeinheit war dass man nicht wußte dass es eigentlich um verschmelzen von
+ * Gruppen ging. Also: Jeder ist in einer eigenen Gruppe, sobald ein Pärchen gefunden
+ * ist bekommen ALLE Boxen aus der Gruppe des zweiten die Gruppe des ersten.
+ */
 public class Day8 {
-
     public void part1() {
-
         DB db=new DB();
         Connection conn=db.getConnection();
-
-        int loesung=0;
-    //List<String> input= Tools.readUrlContent("https://adventofcode.com/2025/day/7/input",SESSION_COOKIE);
+        int loesung=1;
+        List<String> input= Tools.readUrlContent("https://adventofcode.com/2025/day/8/input",SESSION_COOKIE);
     //testdaten
+/*
      List<String> input =new ArrayList<>();
 
            input.add("162,817,812");
@@ -37,34 +43,24 @@ public class Day8 {
            input.add("862, 61,35");
            input.add("984, 92,344");
            input.add("425,690,689");
-
+*/
 
            //Input Tabelle erstellen
         try {
             Statement stmt = conn.createStatement();
             String sqlCreate = "create table input (gruppe decimal, x decimal,y decimal, z decimal);\n";
             stmt.executeUpdate(sqlCreate);
+            int i = 1;
             for (String value : input) {
-                String sqlInsert = "INSERT INTO input VALUES (0," + value + ")";
+               String sqlInsert = "INSERT INTO input VALUES (" + i + "," + value + ")";
                 stmt.executeUpdate(sqlInsert);
+                i++;
             }
-
-            String sqlView = "CREATE VIEW abstaende AS " +
-                    "select input.x x1,input.y y1 ,input.z z1 ,input2.x x2,input2.y y2,input2.z z2, " +
-                    "sqrt(power((input2.x-input.x),2)+power((input2.y-input.y),2)+power((input2.z-input.z),2))  abstand " +
-                    "from input  " +
-                    "join input input2 " +
-                    "ON(INPUT.x < INPUT2.x) " +
-                    "OR (INPUT.x = INPUT2.x AND INPUT.y < INPUT2.y) " +
-                    "OR (INPUT.x = INPUT2.x AND INPUT.y = INPUT2.y " +
-                    "AND INPUT.z < INPUT2.z) " +
-                    "where abstand>0";
-
-            sqlView = "CREATE VIEW abstaende AS " +
+            //View erstellen die die Pärchen findet und den abstand berechnet
+            String  sqlView = "CREATE VIEW abstaende AS " +
                     "SELECT " +
-                    "x1, y1, z1, x2, y2, z2, abstand " + // Wähle die Aliasnamen aus der Subquery
+                    "x1, y1, z1, x2, y2, z2, abstand " +
                     "FROM (" +
-                    // Subquery: Hier wird der 'abstand' berechnet und als Alias bekannt gemacht
                     "SELECT " +
                     "input.x x1, input.y y1, input.z z1, " +
                     "input2.x x2, input2.y y2, input2.z z2, " +
@@ -73,28 +69,26 @@ public class Day8 {
                     "input " +
                     "JOIN " +
                     "input input2 ON (INPUT.x < INPUT2.x) OR (INPUT.x = INPUT2.x AND INPUT.y < INPUT2.y) OR (INPUT.x = INPUT2.x AND INPUT.y = INPUT2.y AND INPUT.z < INPUT2.z) " +
-                    ") AS Berechnungen " + // Alias für die Subquery ist nötig
-                    "WHERE abstand > 0;"; // Filtern des Aliases in der äußeren WHERE-Klausel
+                    ") AS Berechnungen " +
+                    "WHERE abstand > 0;";
 
             stmt.executeUpdate(sqlView);
 
+            //Gruppe auslesen
             PreparedStatement selectgruppestmt = conn.prepareStatement("select gruppe from input where x=? and y=? and z=?", ResultSet.TYPE_SCROLL_INSENSITIVE);
-            PreparedStatement updategruppestmt = conn.prepareStatement("update input set gruppe=? where x=? AND y=? AND z=?");
+            //Die Gruppe aller Datensätze einer Gruppe ändern
+            PreparedStatement updategruppestmt = conn.prepareStatement("update input set gruppe=? where gruppe=?");
 
+            //Jetzt sortiert nach Abstand durch die Pärchen gehen:
             String sqlSelect = "SELECT * from abstaende order by abstand";
             ResultSet rs = stmt.executeQuery(sqlSelect);
-
-            int hoechstegruppennr = 0;
             int zaehler = 0;
             //Für alle abstände
-            while (rs.next() && zaehler<10) {
+            while (rs.next() && zaehler < 1000) {
                 zaehler++;
-                System.out.println(rs.getInt(1) + " " + rs.getInt(2) + " " + rs.getString(3) + " " + rs.getString(4) + " " + rs.getString(5) + " " + rs.getString(6) + " " + rs.getString(7));
                 int gruppennr1 = 0;
                 int gruppennr2 = 0;
-                boolean flag = false;
-                //Gruppe prüfen
-                //select gruppe from input where (x=? and y=? and z=?)
+
                 selectgruppestmt.setInt(1, rs.getInt(1));
                 selectgruppestmt.setInt(2, rs.getInt(2));
                 selectgruppestmt.setInt(3, rs.getInt(3));
@@ -107,84 +101,34 @@ public class Day8 {
                 selectgruppestmt.setInt(2, rs.getInt(5));
                 selectgruppestmt.setInt(3, rs.getInt(6));
                 rsGruppe = selectgruppestmt.executeQuery();
-
                 if (rsGruppe.next()) {
                     gruppennr2 = rsGruppe.getInt(1);
                 }
 
-                int gruppennr = 0;
-
-                if (0 == gruppennr1 && 0 == gruppennr2) {
-                    hoechstegruppennr++;
-                    gruppennr = hoechstegruppennr;
-                }
-                if (0 == gruppennr1 && 0 < gruppennr2) {
-                    gruppennr = gruppennr2;
-                }
-                if (0 == gruppennr2 && 0 < gruppennr1) {
-                    gruppennr = gruppennr1;
-                }
-
-                if (gruppennr2 ==gruppennr1 && gruppennr1>0) {
-                    gruppennr = gruppennr1;
-                }
-
-                System.out.println("G1:"+gruppennr1);
-                System.out.println("G2:"+gruppennr2);
-                System.out.println(gruppennr);
-                //Gruppe für x1,y1,z1 setzen
-                //update input set gruppe=? where x=? AND y=? & z=?
-                if (gruppennr1 == 0 && (gruppennr2==0 ||gruppennr2==gruppennr)) {
-                    updategruppestmt.setInt(1, gruppennr);
-                    updategruppestmt.setInt(2, rs.getInt(1));
-                    updategruppestmt.setInt(3, rs.getInt(2));
-                    updategruppestmt.setInt(4, rs.getInt(3));
+                //Wenn die Gruppen unterschiedlich sind eliminiere die 2. Gruppe
+                if (gruppennr1 != gruppennr2) {
+                    //update input set gruppe=? where gruppe=?
+                    updategruppestmt.setInt(1, gruppennr1);
+                    updategruppestmt.setInt(2, gruppennr2);
                     updategruppestmt.executeUpdate();
                 }
-                //Gruppe für x2,y2,z3 setzen
-                if (gruppennr2 == 0  && (gruppennr1==0 || gruppennr1==gruppennr)) {
-                    updategruppestmt.setInt(1, gruppennr);
-                    updategruppestmt.setInt(2, rs.getInt(4));
-                    updategruppestmt.setInt(3, rs.getInt(5));
-                    updategruppestmt.setInt(4, rs.getInt(6));
-                    updategruppestmt.executeUpdate();
-                }
+
+
             }
+            //Fertig jetzt nur noch zählen und zuammenrechnen
+            String sql = "select gruppe, count(*) as Anzahl from input group by gruppe order by Anzahl desc limit 3";
+            ResultSet rs3 = stmt.executeQuery(sql);
 
-                //Fertig
-                String sql = "SELECT * from input";
-                ResultSet rs3 = stmt.executeQuery(sql);
-
-                while (rs3.next()) {
-
-                    System.out.println("G:" + rs3.getInt(1) + "K:" + rs3.getInt(2) + " " + rs3.getInt(3) + " " + rs3.getInt(4));
-                }
-
-             sql = "select gruppe, count(*) as Anzahl from input group by gruppe order by Anzahl desc ";
-             rs3 = stmt.executeQuery(sql);
             while (rs3.next()) {
-
-                System.out.println("G:" + rs3.getInt(1) + "Anzahl:" + rs3.getInt(2));
+                int anzahl=rs3.getInt(2);
+                System.out.println("Gruppe:" + rs3.getInt(1) + "Anzahl:" + anzahl);
+                loesung*=anzahl;
             }
-
-            }
-
-
-     catch (
-    SQLException e) {
-        e.printStackTrace();
-    }
-
-
-
-
-
-
-        System.out.println("Lösung: "+loesung);
-}
-
-
-
-
-
+        }
+         catch (
+                SQLException e) {
+                e.printStackTrace();
+         }
+         System.out.println("Lösung: "+loesung);
+     }
 }
