@@ -1,12 +1,8 @@
 package de.do1eh.Advent2025;
 import de.do1eh.Utils.DB;
-
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
-
 import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
-
 /**
  * Puaha...doch noch geschafft...ich mag SQL
  * Die gemeinheit war dass man nicht wußte dass es eigentlich um verschmelzen von
@@ -20,9 +16,8 @@ public class Day8 {
         int loesung=1;
         List<String> input= Tools.readUrlContent("https://adventofcode.com/2025/day/8/input",SESSION_COOKIE);
     //testdaten
-/*
+    /*
      List<String> input =new ArrayList<>();
-
            input.add("162,817,812");
            input.add("57, 618,57");
            input.add("906,360,560");
@@ -44,7 +39,6 @@ public class Day8 {
            input.add("984, 92,344");
            input.add("425,690,689");
 */
-
            //Input Tabelle erstellen
         try {
             Statement stmt = conn.createStatement();
@@ -73,12 +67,10 @@ public class Day8 {
                     "WHERE abstand > 0;";
 
             stmt.executeUpdate(sqlView);
-
             //Gruppe auslesen
             PreparedStatement selectgruppestmt = conn.prepareStatement("select gruppe from input where x=? and y=? and z=?", ResultSet.TYPE_SCROLL_INSENSITIVE);
             //Die Gruppe aller Datensätze einer Gruppe ändern
             PreparedStatement updategruppestmt = conn.prepareStatement("update input set gruppe=? where gruppe=?");
-
             //Jetzt sortiert nach Abstand durch die Pärchen gehen:
             String sqlSelect = "SELECT * from abstaende order by abstand";
             ResultSet rs = stmt.executeQuery(sqlSelect);
@@ -96,7 +88,6 @@ public class Day8 {
                 if (rsGruppe.next()) {
                     gruppennr1 = rsGruppe.getInt(1);
                 }
-
                 selectgruppestmt.setInt(1, rs.getInt(4));
                 selectgruppestmt.setInt(2, rs.getInt(5));
                 selectgruppestmt.setInt(3, rs.getInt(6));
@@ -104,7 +95,6 @@ public class Day8 {
                 if (rsGruppe.next()) {
                     gruppennr2 = rsGruppe.getInt(1);
                 }
-
                 //Wenn die Gruppen unterschiedlich sind eliminiere die 2. Gruppe
                 if (gruppennr1 != gruppennr2) {
                     //update input set gruppe=? where gruppe=?
@@ -112,8 +102,6 @@ public class Day8 {
                     updategruppestmt.setInt(2, gruppennr2);
                     updategruppestmt.executeUpdate();
                 }
-
-
             }
             //Fertig jetzt nur noch zählen und zuammenrechnen
             String sql = "select gruppe, count(*) as Anzahl from input group by gruppe order by Anzahl desc limit 3";
