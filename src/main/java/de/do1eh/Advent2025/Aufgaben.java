@@ -15,7 +15,7 @@ public class Aufgaben {
 
     public static void main(String[] args) {
         Day8 advent = new Day8();
-        advent.part1();
+        advent.part2();
 
     }
 }
