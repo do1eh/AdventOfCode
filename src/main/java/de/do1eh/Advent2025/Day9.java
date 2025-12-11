@@ -42,12 +42,9 @@ public class Day9 {
             String ref = input.get(i);
             long refx = Integer.parseInt(input.get(i).trim().substring(0, input.get(i).trim().indexOf(',')));
             long refy = Integer.parseInt(input.get(i).trim().substring(input.get(i).trim().indexOf(',') + 1));
-
             for (int a = i + 1; a < input.size(); a++) {
-
                 long x = Integer.parseInt(input.get(a).trim().substring(0, input.get(a).trim().indexOf(',')));
                 long y = Integer.parseInt(input.get(a).trim().substring(input.get(a).trim().indexOf(',') + 1));
-
                 long difx;
                 long dify;
                 if (x > refx) {
@@ -60,16 +57,11 @@ public class Day9 {
                 } else {
                     dify = refy - y + 1;
                 }
-
                 long flaeche = difx * dify;
                 if (flaeche > loesung) {
                     loesung = flaeche;
                 }
-
-
             }
-
-
         }
         System.out.println(loesung);
     }
@@ -101,38 +93,32 @@ public class Day9 {
         GeometryFactory factory = new GeometryFactory();
         Coordinate[] coords = new Coordinate[input.size()+1];
         for (int i = 0; i < input.size(); i++) {
-
             int inputx = Integer.parseInt(input.get(i).trim().substring(0, input.get(i).trim().indexOf(',')));
             int inputy = Integer.parseInt(input.get(i).trim().substring(input.get(i).trim().indexOf(',') + 1));
-
             coords[i] = new Coordinate(inputx, inputy);
         }
         //am ende noch einmal die erste um den ring zu schließen
         int inputx = Integer.parseInt(input.get(0).trim().substring(0, input.get(0).trim().indexOf(',')));
         int inputy = Integer.parseInt(input.get(0).trim().substring(input.get(0).trim().indexOf(',') + 1));
-
         coords[input.size()] = new Coordinate(inputx, inputy);
 
-// 3. Erstellen Sie den Linearen Ring (die Hülle des Polygons)
+        //Linearen Ring (die Hülle des Polygons) erstellen
         LinearRing shell = factory.createLinearRing(coords);
 
-// 4. Erstellen Sie das Polygon (ohne innere Löcher, daher 'null' für innerHoles)
+        // Daraus Polygon erstellen
         Polygon polygonA = factory.createPolygon(shell, null);
 
-
         for (int i = 0; i < input.size(); i++) {
-            //System.out.println(input.get(i).trim());
             String ref = input.get(i);
             long refx = Integer.parseInt(input.get(i).trim().substring(0, input.get(i).trim().indexOf(',')));
             long refy = Integer.parseInt(input.get(i).trim().substring(input.get(i).trim().indexOf(',') + 1));
 
             for (int a = i + 1; a < input.size(); a++) {
-
                 long x = Integer.parseInt(input.get(a).trim().substring(0, input.get(a).trim().indexOf(',')));
                 long y = Integer.parseInt(input.get(a).trim().substring(input.get(a).trim().indexOf(',') + 1));
-
                 long difx;
                 long dify;
+
                 if (x > refx) {
                     difx = x - refx + 1;
                 } else {
@@ -152,22 +138,15 @@ public class Day9 {
                             new Coordinate(refx, refy),
                             new Coordinate(x, refy),
                             new Coordinate(x, y),
-
                     };
-
                     LinearRing shellB = factory.createLinearRing(coordsB);
                     Polygon polygonB = factory.createPolygon(shellB, null);
-
                     if (polygonA.contains(polygonB)) {
                         loesung = flaeche;
                     }
                 }
-
-
             }
-
         }
         System.out.println(loesung);
     }
-
 }

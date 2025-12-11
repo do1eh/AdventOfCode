@@ -14,7 +14,6 @@ private final Map<String, Long> memo = new HashMap<>();
      * Teil 1 einfach Brute-force rekursiv durch den Baum und Pfade zählen: fertig
      */
     public void part1() {
-
     List<String> input = readUrlContent("https://adventofcode.com/2025/day/11/input", SESSION_COOKIE);
 /*
     List<String> input =new ArrayList<String>();
@@ -37,34 +36,25 @@ private final Map<String, Long> memo = new HashMap<>();
         String[] value=zeile.substring(zeile.indexOf(":")+2).split(" ");
         List<String> values= Arrays.asList(value);
         tree.put(key,values);
-
     }
-
     //startknoten holen
     List<String> start=tree.get("you");
     //System.out.println(start);
     checkZiel(start);
-
-
-
     System.out.println("Lösung:" + loesung);
-
-}
+    }
 
     private void checkZiel(List<String> ausgaenge) {
-
         //wenn Ziel erreich: Weg zählen
         if (ausgaenge.contains("out")) {
             loesung++;
         } else {
-
             //Für alle ausgänge weitersuchen
             for (String ausgang:ausgaenge) {
                 List<String> nextausgaenge=tree.get(ausgang);
                 checkZiel(nextausgaenge);
             }
         }
-
     }
 
     /**
@@ -78,7 +68,6 @@ private final Map<String, Long> memo = new HashMap<>();
         List<String> input = readUrlContent("https://adventofcode.com/2025/day/11/input", SESSION_COOKIE);
  /*
         List<String> input =new ArrayList<String>();
-
         input.add("svr: aaa bbb");
         input.add("aaa: fft");
         input.add("fft: ccc");
@@ -101,14 +90,11 @@ private final Map<String, Long> memo = new HashMap<>();
             String[] value=zeile.substring(zeile.indexOf(":")+2).split(" ");
             List<String> values= Arrays.asList(value);
             tree.put(key,values);
-
         }
-
         //startknoten holen
         List<String> start=tree.get("svr");
         List<String> naechsterbesuch = new ArrayList<>();
         naechsterbesuch.add("svr");
-
         for (String ausgang:start) {
             loesung += checkZiel2(naechsterbesuch,ausgang, false, false);
         }

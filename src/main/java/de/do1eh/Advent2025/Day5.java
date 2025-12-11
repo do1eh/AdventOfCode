@@ -28,8 +28,6 @@ public class Day5 {
     public void day5part2() {
         List<String> input = Tools.readUrlContent("https://adventofcode.com/2025/day/5/input", SESSION_COOKIE);
         List<String> input2=new ArrayList<>();
-
-
         long loesung=0;
         //System.out.println(input.size());
         for (String range : input) {
