@@ -33,7 +33,8 @@ public class Day9 {
         input.add("9,5");
         input.add("2,5");
         input.add("2,3");
-        input.add("7,3");
+        input.add("7,3"); List<String> input= readUrlContent("https://adventofcode.com/2025/day/9/input", SESSION_COOKIE);
+        /*
         */
         long loesung = 0;
         System.out.println("size:" + input.size());
