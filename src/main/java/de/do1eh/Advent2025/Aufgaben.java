@@ -1,9 +1,5 @@
 package de.do1eh.Advent2025;
 
-import java.util.*;
-
-import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
-
 /**
  * Achtung: Zum Ausführen benötigt man noch das SESSION_COOKIE
  * Dieses findet man indem man sich mit einem beliebigen browser bei Adventofcode.com einloggt,
@@ -14,8 +10,14 @@ import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
 public class Aufgaben {
 
     public static void main(String[] args) {
-        Day8 advent = new Day8();
-        advent.part2();
+
+        try {
+            Day12 advent = new Day12();
+            advent.part1();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }
