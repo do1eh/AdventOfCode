@@ -7,9 +7,9 @@ import static de.do1eh.Advent2025.Tools.*;
 
 /**
  * Was 'ne Verarsche...von wegen drehen und flippen
- * 2 Prüfunen:
- * 1. gesamtzahl der punkte ist größer als punkte der fläche -> passt nicht rein
- * 2. alle 3x3 kacheln nebeneinander passen in den Raum -> passt auf jeden Fall
+ * 2 Prüfungen:
+ * 1. Gesamtzahl der punkte ist größer als Punkte der Fläche -> passt nicht rein
+ * 2. Alle 3x3 Kacheln nebeneinander passen in den Raum -> passt auf jeden Fall
  */
 public class Day12 {
 
