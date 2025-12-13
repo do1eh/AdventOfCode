@@ -12,7 +12,7 @@ public class Aufgaben {
     public static void main(String[] args) {
 
         try {
-            Day12 advent = new Day12();
+            Day10 advent = new Day10();
             advent.part1();
         }
         catch (Exception e) {

@@ -28,27 +28,55 @@ public class Day10 {
             int lampe = Integer.parseInt(lampenstr, 2);
 
             String schalterstr = input.get(i).substring(input.get(i).indexOf(']') + 1, input.get(i).indexOf('{'));
+            List<Integer> schalter=new ArrayList<>();
 
             Pattern pattern = Pattern.compile("\\([^)]+\\)");
             Matcher matcher = pattern.matcher(schalterstr);
-            List<String> schalter = new ArrayList<>();
+            List<String> schalterstrlst = new ArrayList<>();
 
             while (matcher.find()) {
-                // Fügt den gefundenen Tupel-String der Liste hinzu
-                schalter.add(matcher.group());
+                 schalterstrlst.add(matcher.group());
             }
 
 
-            String joltage = input.get(i).substring(input.get(i).indexOf('{') + 1, input.get(i).indexOf('}'));
-            HashMap<Integer, Integer> druecken = new HashMap<>();
+            for (String schalterstring:schalterstrlst) {
+                List<Integer> schalterint=new ArrayList<>();
+                schalterstring=schalterstring.replace("(","");
+                schalterstring=schalterstring.replace(")","");
+                String[] schaltertmp=schalterstring.split(",");
 
-            System.out.println(lampe);
-            System.out.println(lampenstr);
-            System.out.println(1 << lampenstr.length());
-            System.out.println(schalter);
+                //getrennte schalterstrings in int umwandeln
+                for (String schalter2:schaltertmp) {
+                    schalterint.add(Integer.parseInt(schalter2));
+                }
+
+                //schalteeints durchlaufen und in bitmuster ändern
+                String bitmuster="";
+                for (int pos:schalterint) {
+                    while(pos>bitmuster.length()) {bitmuster+="0";}
+                    bitmuster+="1";
+                }
+                System.out.println("schalterresultat:"+bitmuster);
+                //bitmuster speichern
+                schalter.add(Integer.parseInt(bitmuster, 2));
+             }
+            //String joltage = input.get(i).substring(input.get(i).indexOf('{') + 1, input.get(i).indexOf('}'));
+
+            System.out.println("lampe:"+lampe);
+            System.out.println("lampestring:"+lampenstr);
+            //System.out.println(1 << lampenstr.length());
+            System.out.println("schalterresultatliste"+schalter);
             //System.out.println(joltage);
 
+            //Drückalgo alle Kombinationen aus der schalterresultatliste durchgehen per xor verknüpfen und mit
 
+
+
+
+
+
+
+/*
             String ergebnis = "0000";
             int button = 0;
             for (String schalten : schalter) {
@@ -121,7 +149,7 @@ public class Day10 {
                 }
 
             }//ende input durchlaufen
-
+*/
         }
     }
 }
