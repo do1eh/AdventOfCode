@@ -68,7 +68,9 @@ public class Day10 {
             System.out.println("schalterresultatliste"+schalter);
             //System.out.println(joltage);
 
-            //Drückalgo alle Kombinationen aus der schalterresultatliste durchgehen per xor verknüpfen und mit
+            //Drückalgo:  Alle Kombinationen aus der Schalterresultatliste durchgehen, per xor verknüpfen und mit
+            //Ziel vergleichen Wenn Ergebnis==Ziel -> anzahl benutzte schalter speichern
+            //Am Ende: loesung+=kleinste Anzahl Schalter dieser Runde
 
 
 
@@ -76,80 +78,7 @@ public class Day10 {
 
 
 
-/*
-            String ergebnis = "0000";
-            int button = 0;
-            for (String schalten : schalter) {
-                schalten = schalten.replace("(", "");
-                schalten = schalten.replace(")", "");
-                System.out.println(schalten);
-                String[] bitsetzen = schalten.split(",");
-                List<Integer> bits = new ArrayList<>();
-                int bitmuster = 0;
-
-                for (String bit : bitsetzen) {
-
-                    switch (bit) {
-                        case "0":
-                            bitmuster += 1;
-                            break;
-                        case "1":
-                            bitmuster += 2;
-                            break;
-                        case "2":
-                            bitmuster += 4;
-                            break;
-                        case "3":
-                            bitmuster += 8;
-                            break;
-                        case "4":
-                            bitmuster += 16;
-                            break;
-                        case "5":
-                            bitmuster += 32;
-                            break;
-                        case "6":
-                            bitmuster += 64;
-                            break;
-                        case "7":
-                            bitmuster += 128;
-                            break;
-                        case "8":
-                            bitmuster += 256;
-                            break;
-                        case "9":
-                            bitmuster += 512;
-                            break;
-                        case "10":
-                            bitmuster += 1024;
-                            break;
-                    }
-
-
-                }
-                druecken.put(button, bitmuster);
-                //System.out.println(bitmuster);
-                //System.out.println(Integer.toBinaryString(bitmuster));
-            }
-
-            //alle schalterstellungen durchlaufen
-            for (int schalterstellungen = 0; schalterstellungen < 1 << lampenstr.length(); schalterstellungen++) {
-
-                List<Integer> muster = new ArrayList<>();
-                String schalterstellung = Integer.toBinaryString(schalterstellungen);
-                for (int lauf = 0; lauf < schalterstellung.length(); lauf++) {
-                    if (schalterstellung.charAt(lauf) == 1) {
-                        muster.add(druecken.get(lauf));
-                    }
-                }
-
-                int ergebnis2 = 0;
-                for (int lauf = 0; lauf < muster.size(); lauf++) {
-                    ergebnis2 = ergebnis2 ^ muster.get(lauf);
-                }
-
-            }//ende input durchlaufen
-*/
+/
         }
     }
 }
