@@ -24,7 +24,7 @@ public class Day02 {
         long loesung=0;
         long loesung2=0;
         for (String geschenk:input) {
-            System.out.println(geschenk);
+            //System.out.println(geschenk);
             String[] dim=geschenk.split("x");
            //2*l*w + 2*w*h + 2*h*l
             long l=Integer.parseInt(dim[0]);

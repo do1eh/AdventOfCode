@@ -12,8 +12,9 @@ public class Aufgaben {
     public static void main(String[] args) {
 
         try {
-            Day02 advent = new Day02();
+            Day05 advent = new Day05();
             advent.part1();
+            advent.part2();
         }
         catch (Exception e) {
             e.printStackTrace();
