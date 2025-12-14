@@ -14,13 +14,13 @@ public class Day10 {
     public void part1() {
 
         int loesung=0;
-        List<String> input = readUrlContent("https://adventofcode.com/2025/day/10/input", SESSION_COOKIE);
-        /*
+        //List<String> input = readUrlContent("https://adventofcode.com/2025/day/10/input", SESSION_COOKIE);
+
         List<String> input = new ArrayList<String>();
         input.add("[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}");
         input.add("[...#.] (0,2,3,4) (2,3) (0,4) (0,1,2) (1,2,3,4) {7,5,12,7,2}");
         input.add("[.###.#] (0,1,2,3,4) (0,3,4) (0,1,2,4,5) (1,2) {10,11,11,5,10,5}");
-*/
+
 
         for (int i = 0; i < input.size(); i++) {
 
@@ -66,7 +66,7 @@ public class Day10 {
                 //bitmuster speichern
                 schalter.add(Integer.parseInt(bitmuster, 2));
              }
-            //String joltage = input.get(i).substring(input.get(i).indexOf('{') + 1, input.get(i).indexOf('}'));
+            String joltage = input.get(i).substring(input.get(i).indexOf('{') + 1, input.get(i).indexOf('}'));
 
             //System.out.println("lampe:"+lampe);
             //System.out.println("lampestring:"+lampenstr);
@@ -94,10 +94,18 @@ public class Day10 {
             }
             //System.out.println("anzahl:"+anzahlknopfdruecke);
            loesung+=anzahlknopfdruecke;
+
+        //Part2: joltage anpassung
+
         }
         System.out.println("Loesung:"+loesung);
     }
 
+    /**
+     * Die Methode ist hat freundlicherweise gemini erstellt
+     * @param numbers
+     * @return
+     */
     public static List<List<Integer>> generateSubsets(List<Integer> numbers) {
         List<List<Integer>> subsets = new ArrayList<>();
         int n = numbers.size();
@@ -105,17 +113,9 @@ public class Day10 {
         // Die Gesamtzahl der möglichen Teilmengen (einschließlich der leeren Menge)
         // ist 2^n, wobei n die Größe der Liste ist.
         int totalSubsets = 1 << n; // Das ist gleich 2 hoch n (2^n)
-/*
-        System.out.println("--- Generiere Teilmengen ---");
-        System.out.println("Listenlänge (n): " + n);
-        System.out.println("Anzahl Teilmengen (2^n): " + totalSubsets);
-        System.out.println("----------------------------");
-*/
-
-        // Wir durchlaufen alle Zahlen von 0 bis 2^n - 1. Jede Zahl ist eine Bitmaske.
+       // Wir durchlaufen alle Zahlen von 0 bis 2^n - 1. Jede Zahl ist eine Bitmaske.
         for (int i = 0; i < totalSubsets; i++) {
             List<Integer> currentSubset = new ArrayList<>();
-
             // Überprüfe jedes Element im Eingabearray
             for (int j = 0; j < n; j++) {
 
@@ -126,11 +126,9 @@ public class Day10 {
                     currentSubset.add(numbers.get(j));
                 }
             }
-
             // Füge die gefundene Teilmenge zur Gesamtliste hinzu
             subsets.add(currentSubset);
         }
-
-        return subsets;
+          return subsets;
     }
 }
