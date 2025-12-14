@@ -2,8 +2,6 @@ package de.do1eh.Advent2015;
 
 import de.do1eh.Advent2025.Tools;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
