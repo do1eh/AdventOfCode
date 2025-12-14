@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
-import static de.do1eh.Advent2025.Tools.*;
-public class Day6 {
+
+public class Day06 {
 
     /**
      * Tag 6:  Matheaufgaben der Cephaloiden

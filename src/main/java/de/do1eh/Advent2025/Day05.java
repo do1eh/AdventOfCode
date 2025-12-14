@@ -4,8 +4,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
-import static de.do1eh.Advent2025.Tools.*;
-public class Day5 {
+
+public class Day05 {
     /**
      * Tag5 Teil 2: Abgelaufene Lebensmittel finden
      * Teil 1 ist hier nicht zu finden, da ich diesen in einer Datenbank mit SQL gelöst habe.

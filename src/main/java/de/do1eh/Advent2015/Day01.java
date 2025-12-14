@@ -6,7 +6,7 @@ import java.util.List;
 
 import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
 
-public class Day1 {
+public class Day01 {
 
     public void part1(){
         List<String> input= Tools.readUrlContent("https://adventofcode.com/2015/day/1/input", SESSION_COOKIE);

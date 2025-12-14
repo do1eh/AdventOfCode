@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
-import static de.do1eh.Advent2025.Tools.*;
-public class Day7 {
+
+public class Day07 {
     final Map<String, Long> memo = new HashMap<>();
     /**
      * Tag 7: Teleporter

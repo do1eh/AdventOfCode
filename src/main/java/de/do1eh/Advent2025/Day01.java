@@ -2,8 +2,8 @@ package de.do1eh.Advent2025;
 import java.util.List;
 
 import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
-import static de.do1eh.Advent2025.Tools.*;
-public class Day1 {
+
+public class Day01 {
 
     /**
      * Tag 1: Türschloss knacken

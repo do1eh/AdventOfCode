@@ -2,8 +2,8 @@ package de.do1eh.Advent2025;
 import java.util.List;
 
 import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
-import static de.do1eh.Advent2025.Tools.*;
-public class Day2 {
+
+public class Day02 {
 
     /**
      * Tag 2: Falsche Artikelnummern im Gift-Shop aussortieren

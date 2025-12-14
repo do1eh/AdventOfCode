@@ -9,7 +9,7 @@ import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
  * Gruppen ging. Also: Jeder ist in einer eigenen Gruppe, sobald ein Pärchen gefunden
  * ist bekommen ALLE Boxen aus der Gruppe des zweiten die Gruppe des ersten.
  */
-public class Day8 {
+public class Day08 {
     public void part1() {
         DB db=new DB();
         Connection conn=db.getConnection();

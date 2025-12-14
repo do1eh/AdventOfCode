@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
-import static de.do1eh.Advent2025.Tools.*;
-public class Day3 {
+
+public class Day03 {
     int position=0;
     /**
      * Tag 3: Batterien an die Rolltreppe anschließen damit sie fährt

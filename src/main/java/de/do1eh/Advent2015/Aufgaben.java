@@ -1,7 +1,5 @@
 package de.do1eh.Advent2015;
 
-import de.do1eh.Advent2025.Day10;
-
 /**
  * Achtung: Zum Ausführen benötigt man noch das SESSION_COOKIE
  * Dieses findet man indem man sich mit einem beliebigen browser bei Adventofcode.com einloggt,
@@ -14,7 +12,7 @@ public class Aufgaben {
     public static void main(String[] args) {
 
         try {
-            Day1 advent = new Day1();
+            Day01 advent = new Day01();
             advent.part1();
         }
         catch (Exception e) {

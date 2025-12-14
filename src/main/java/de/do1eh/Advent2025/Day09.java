@@ -5,13 +5,12 @@ import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.LinearRing;
 import org.locationtech.jts.geom.Polygon;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static de.do1eh.Advent2025.Session.SESSION_COOKIE;
 import static de.do1eh.Advent2025.Tools.*;
 
-public class Day9 {
+public class Day09 {
 
     /**
      * Tag 9: Fußboden fliesen
